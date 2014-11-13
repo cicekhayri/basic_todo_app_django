@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% for todo in todos %}
+	{{ todo.title }}
+	{{ todo.description }}
+	{{ todo.completed }}
+{% endfor %}
