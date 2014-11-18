@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 
-{% for todo in todos %}
-	{{ todo.title }}
-	{{ todo.description }}
-	{{ todo.completed }}
-{% endfor %}
+{% block content %}
+<dl>
+	{% for todo in todos %}
+  <form method="post" action="">
+    {% csrf_token %}
+  {% if todo.completed %}
+    <dt><strike>{{ todo.title }}:</strike></dt>
+    <dd><strike>{{ todo.description }}</strike><br>
+    <input type="checkbox" name="completed" checked="checked"> Completed?</dd>
+  {% else %}
+    <dt><strong>{{ todo.title }}:</strong></dt>
+    <dd><strong>{{ todo.description }}</strong><br>
+    <input type="checkbox" name="completed"> Completed?</dd>
+  {% endif %}
+  <input type="hidden" name="todoid" value="{{todo.id}}">
+  <input type="submit" value="sumbit" />
+  <br><br>
+  </form>
+	{% endfor %}
+</dl>
+{% endblock %}
